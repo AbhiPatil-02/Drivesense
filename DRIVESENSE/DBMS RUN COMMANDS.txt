@@ -1,0 +1,58 @@
+DBMS RUN
+
+TRI-1
+-- testing the above trigger
+UPDATE VEHICLES
+SET Owner_Id = 3
+WHERE Reg_Num = 'KA01AB1234';
+
+SELECT * FROM VEHICLE_OWNERSHIP_LOG;
+
+
+
+TRI-2
+-- testing the above triggerINSERT INTO SERVICE_RECORD (Service_Cost, Service_type, Service_Date, Odometer_Readings, WorkShop_Id, Reg_Num)
+VALUES (1500, 'General Service', '2025-10-31', 50000, 1, 'KA01AB1234');
+
+SELECT Milage FROM VEHICLES WHERE Reg_Num = 'KA01AB1234';
+
+
+TRI-3
+-- testing the above trigger
+INSERT INTO PART_REPLACEMENT (Part_Cost, Replacement_Date, Warranty_Period, Service_Task_Id)
+VALUES (1200, '2025-11-01', 12, 2);
+
+SELECT * FROM WARRANTY_CLAIM;
+
+
+TRI-4
+-- testing the above trigger
+INSERT INTO SERVICE_RECORD (Service_Cost, Service_type, Service_Date, Odometer_Readings, WorkShop_Id, Reg_Num)
+VALUES (900, 'Quick Check', '2025-01-01', 48000, 1, 'KA01AB1234');
+
+
+procedure-1
+CALL AddNewVehicleWithOwner(
+    'Ravi Kumar', '9876543210', 'ravi@gmail.com', 'Bangalore', 'Male',
+    'KA05MN1234', 'Hyundai', 'i20', 2022, 12000
+);
+
+
+
+Procedure-2
+CALL AddServiceRecord(1500, 'Full Service', '2025-10-30', 54000, 'Routine checkup', 1, 'KA05MN1234');
+
+CALL ReplacePart('BRK001', 'OEM45', 'Brake Pad', 12, 2, 2500, '2025-11-01');
+
+Procedure-3
+CALL GetVehicleServiceSummary('KA05MN1234');
+
+
+
+
+vehical numbers
+KA01AB1234
+TN09GH3456
+KL07OP1234
+MH14KL7890
+
